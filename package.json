@@ -1,0 +1,21 @@
+{
+  "name": "backendstore",
+  "version": "1.0.0",
+  "description": "API to store user",
+  "main": "src/index.js",
+  "author": "Gabriel Camargo",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "pg": "^8.11.1"
+  },
+  "devDependencies": {
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^3.0.1"
+  }
+}
