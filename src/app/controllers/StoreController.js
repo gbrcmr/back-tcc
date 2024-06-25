@@ -30,6 +30,14 @@ class StoreController {
         response.json(storeid);
     }
 
+    async getDataStore(request, response) {
+        const { id } = request.params;
+
+        const storeid = await StoreRepository.getDataStore(id);
+
+        response.json(storeid);
+    }
+
     async addToCart(request, response) {
         const { userid, prodids } = request.body;
         const cart = await StoreRepository.createStore(userid, prodids);

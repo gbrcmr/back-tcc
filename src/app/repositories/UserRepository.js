@@ -16,12 +16,12 @@ class UserRepository {
         `, [email, senha]);
         return row;
     }
-    async createStore(userid, lojaid, nome_loja, email_loja, telefone_loja, instagram) {
+    async createStore(userid, lojaid, nome_loja, email_loja, telefone_loja, instagram, foto_loja) {
         const [row] = await db.query(`
-        INSERT INTO loja(userid, lojaid, nome_loja, email_loja, telefone_loja, instagram)
-        VALUES($1, $2, $3, $4, $5, $6)
+        INSERT INTO loja(userid, lojaid, nome_loja, email_loja, telefone_loja, instagram, foto_loja)
+        VALUES($1, $2, $3, $4, $5, $6, $7)
         RETURNING *
-    `, [userid, lojaid, nome_loja, email_loja, telefone_loja, instagram]);
+    `, [userid, lojaid, nome_loja, email_loja, telefone_loja, instagram, foto_loja]);
         return row;
     }
 

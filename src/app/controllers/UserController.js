@@ -19,8 +19,8 @@ class UserController {
     }
 
     async createStore(request, response) {
-        const { userid, lojaid, nome_loja, email_loja, telefone_loja, instagram } = request.body;
-        const store = await UserRepository.createStore(userid, lojaid, nome_loja, email_loja, telefone_loja, instagram);
+        const { userid, lojaid, nome_loja, email_loja, telefone_loja, instagram, foto_loja } = request.body;
+        const store = await UserRepository.createStore(userid, lojaid, nome_loja, email_loja, telefone_loja, instagram, foto_loja);
         response.json(store);
     }
 

@@ -3,10 +3,11 @@ const { Router } = require('express');
 const UserController = require('./app/controllers/UserController');
 const StoreController = require('./app/controllers/StoreController');
 const PaymentController = require('./app/controllers/PaymentController');
+const NodemailerController = require('./app/controllers/NodemailerController');
 
 const router = Router();
 
-
+router.get('/send', NodemailerController.sendEmail);
 
 // Rota para listar cobranças Pix
 router.get('/api/external', PaymentController.buscaProduto);
@@ -18,6 +19,7 @@ router.post('/api/createCharge', PaymentController.createCharge);
 router.get('/store/search', StoreController.index);
 router.get('/store/products', StoreController.getProducts);
 router.get('/store/:id', StoreController.show);
+router.get('/store/data/:id', StoreController.getDataStore);
 router.get('/store/mystore/:userid', StoreController.findMyStore);
 router.get('/cart/:userid', UserController.chartById);
 router.get('/cart/product/:prodid', UserController.findByProductId);

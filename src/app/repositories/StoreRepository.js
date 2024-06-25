@@ -21,6 +21,11 @@ class StoreRepository {
         return rows;
     }
 
+    async getDataStore(id) {
+        const rows = await db.query('SELECT * FROM loja WHERE lojaid = $1', [id]);
+        return rows;
+    }
+
 }
 
 
