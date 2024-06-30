@@ -31,8 +31,8 @@ class UserController {
     }
 
     async createOrder(request, response) {
-        const { pedidoid, data_ped, valor_ped, nome_prod, userid } = request.body;
-        const product = await UserRepository.createOrder(pedidoid, data_ped, valor_ped, nome_prod, userid);
+        const { pedidoid, data_ped, valor_ped, nome_prod, userid, prodids } = request.body;
+        const product = await UserRepository.createOrder(pedidoid, data_ped, valor_ped, nome_prod, userid, prodids);
         response.json(product);
     }
 
@@ -69,6 +69,22 @@ class UserController {
     async addToCart(request, response) {
         const { prodid, userid } = request.params;
         const cart = await UserRepository.addToCart(prodid, userid);
+
+        response.json(cart);
+
+    }
+
+    async clearCart(request, response) {
+        const { userid } = request.params;
+        const cart = await UserRepository.clearCart(userid);
+
+        response.json(cart);
+
+    }
+
+    async hideProduct(request, response) {
+        const { prodid, desativado } = request.params;
+        const cart = await UserRepository.hideProduct(prodid, desativado);
 
         response.json(cart);
 

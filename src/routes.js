@@ -7,7 +7,7 @@ const NodemailerController = require('./app/controllers/NodemailerController');
 
 const router = Router();
 
-router.get('/send', NodemailerController.sendEmail);
+router.post('/send', NodemailerController.sendEmail);
 
 // Rota para listar cobranças Pix
 router.get('/api/external', PaymentController.buscaProduto);
@@ -36,6 +36,8 @@ router.post('/create/order', UserController.createOrder);
 
 //PUT
 router.put('/cart/add/:userid/:prodid', UserController.addToCart);
+router.put('/cart/remove/:userid', UserController.clearCart);
+router.put('/product/hide/:prodid/:desativado', UserController.hideProduct);
 
 //DELETE
 router.delete('/cart/delete/:userid/:prodid', UserController.removeFromCart);

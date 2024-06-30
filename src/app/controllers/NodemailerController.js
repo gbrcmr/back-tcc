@@ -3,6 +3,8 @@ const nodemailer = require('nodemailer');
 class NodemailerController {
 
     async sendEmail(req, res) {
+        const { toEmail, emailBody } = req.body; // Assuming these are passed from the client or another part of your application
+
         const email = "brechostoreoficial@outlook.com";
         const pass = 'S3nhabrecho';
 
@@ -10,7 +12,7 @@ class NodemailerController {
             const transporter = nodemailer.createTransport({
                 host: 'smtp-mail.outlook.com',
                 port: 587,
-                secure: false, // TLS requires secureConnection to be false
+                secure: false,
                 auth: {
                     user: email,
                     pass: pass
@@ -19,9 +21,9 @@ class NodemailerController {
 
             const configEmail = {
                 from: email,
-                to: "gabrielcamargo32@gmail.com",
-                subject: "Atualização de pedido - Brecho Store",
-                html: "<h1>Atualização do seu pedido! Aguardando pagamento</h1>"
+                to: toEmail,
+                subject: "Atualização de pedido - Brecho Store", // Default subject if not provided
+                html: emailBody // Default body if not provided
             };
 
             const result = await transporter.sendMail(configEmail);

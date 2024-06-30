@@ -34,12 +34,12 @@ class UserRepository {
         return row;
     }
 
-    async createOrder(pedidoid, data_ped, valor_ped, nome_prod, userid) {
+    async createOrder(pedidoid, data_ped, valor_ped, nome_prod, userid, prodids) {
         const [row] = await db.query(`
-        INSERT INTO pedidos(pedidoid, data_ped, valor_ped, nome_prod, userid)
-        VALUES($1, $2, $3, $4, $5)
+        INSERT INTO pedidos(pedidoid, data_ped, valor_ped, nome_prod, userid, prodids)
+        VALUES($1, $2, $3, $4, $5, $6)
         RETURNING *
-    `, [pedidoid, data_ped, valor_ped, nome_prod, userid]);
+    `, [pedidoid, data_ped, valor_ped, nome_prod, userid, prodids]);
         return row;
     }
 
@@ -70,6 +70,27 @@ class UserRepository {
         WHERE userid = $2
         RETURNING *
     `, [prodid, userid]);
+
+        return rows;
+    }
+
+    async clearCart(userid) {
+        const [rows] = await db.query(`
+        UPDATE usuario
+        SET carrinho = '{}'
+        WHERE userid = $1;
+    `, [userid]);
+
+        return rows;
+    }
+
+    async hideProduct(prodid, desativado) {
+        const [rows] = await db.query(`
+        UPDATE produto
+        SET desativado = $2
+        WHERE prodid = $1
+        RETURNING *
+    `, [prodid, desativado]);
 
         return rows;
     }
